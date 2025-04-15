@@ -27,15 +27,19 @@ document.addEventListener('DOMContentLoaded', function () {
     if (currentTheme) {
         document.documentElement.setAttribute('data-theme', currentTheme);
         updateIcon(currentTheme === 'dark');
+    } else {
+        const isDarkMode = prefersDarkScheme.matches;
+        document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        updateIcon(isDarkMode);
     }
-
-    const isDarkMode = prefersDarkScheme.matches;
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-    updateIcon(isDarkMode);
 
     themeToggle.addEventListener('click', function () {
         let theme;
-        document.documentElement.getAttribute('data-theme') === 'light' ? theme = dark : theme = light
+        if (document.documentElement.getAttribute('data-theme') === 'light') {
+            theme = 'dark';
+        } else {
+            theme = 'light';
+        }
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
         updateIcon(theme === 'dark');

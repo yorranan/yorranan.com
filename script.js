@@ -1,10 +1,10 @@
 async function loadMakdownFile() {
     try {
-        const response = await fetch('./artigos.md');
+        const response = await fetch('./publicacoes.md');
         const markdown = await response.text();
 
-        const artigos = markdown.split('---').map(artigo => artigo.trim());
-        const secaoArtigos = document.querySelector('#artigos');
+        const artigos = markdown.split('---').map(publicacoes => publicacoes.trim());
+        const secaoArtigos = document.querySelector('#publicacoes');
         artigos.forEach(artigoMarkdown => {
             // Usa a biblioteca marked.js para converter Markdown para HTML
             const articleHTML = marked.parse(artigoMarkdown);
